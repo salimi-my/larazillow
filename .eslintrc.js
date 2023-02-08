@@ -1,8 +1,8 @@
-export default {
-  extends: ["eslint:recommended", "plugin:vue/vue3-recommended"],
+module.exports = {
+  extends: ['plugin:vue/vue3-essential', 'prettier'],
   parserOptions: {
     ecmaVersion: 2020,
-    sourceType: "module",
+    sourceType: 'module',
   },
   env: {
     amd: true,
@@ -10,36 +10,29 @@ export default {
     es6: true,
   },
   rules: {
-    indent: ["error", 2],
-    quotes: [
-      "warn",
-      "single",
-      {
-        avoidEscape: true,
-        allowTemplateLiterals: true,
-      },
+    indent: ['error', 2],
+    quotes: ['warn', 'single'],
+    semi: ['warn', 'never'],
+    'no-unused-vars': [
+      'error',
+      { vars: 'all', args: 'after-used', ignoreRestSiblings: true },
     ],
-    semi: ["warn", "never"],
-    "no-unused-vars": [
-      "error",
-      { vars: "all", args: "after-used", ignoreRestSiblings: true },
-    ],
-    "comma-dangle": ["warn", "always-multiline"],
-    "vue/multi-word-component-names": "off",
-    "vue/max-attributes-per-line": "off",
-    "vue/no-v-html": "off",
-    "vue/require-default-prop": "off",
-    "vue/singleline-html-element-content-newline": "off",
-    "vue/html-self-closing": [
-      "warn",
+    'comma-dangle': ['warn', 'always-multiline'],
+    'vue/multi-word-component-names': 'off',
+    'vue/max-attributes-per-line': 'off',
+    'vue/no-v-html': 'off',
+    'vue/require-default-prop': 'off',
+    'vue/singleline-html-element-content-newline': 'off',
+    'vue/html-self-closing': [
+      'warn',
       {
         html: {
-          void: "always",
-          normal: "always",
-          component: "always",
+          void: 'always',
+          normal: 'always',
+          component: 'always',
         },
       },
     ],
-    "vue/no-v-text-v-html-on-component": "off",
+    'vue/no-v-text-v-html-on-component': 'off',
   },
-};
+}
