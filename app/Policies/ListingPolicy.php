@@ -11,6 +11,17 @@ class ListingPolicy
     use HandlesAuthorization;
 
     /**
+     * Overwrite abilities for admin
+     */
+    public function before(?User $user, $ability)
+    {
+        // '?' after variable is for checking whether $user exist or not
+        if ($user?->is_admin /*&& $ability == 'update'*/) {
+            return true;
+        }
+    }
+
+    /**
      * Determine whether the user can view any models.
      *
      * @param  \App\Models\User  $user
@@ -53,7 +64,7 @@ class ListingPolicy
      */
     public function update(User $user, Listing $listing)
     {
-        return $user->id == $listing->by_user_id;
+        return $user->id == $listing->by_user_id /*|| $user->is_admin*/;
     }
 
     /**
