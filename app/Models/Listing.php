@@ -16,4 +16,9 @@ class Listing extends Model
     {
         return $this->belongsTo(\App\Models\User::class, 'by_user_id');
     }
+
+    public function scopeMostRecent($query)
+    {
+        return $query->orderByDesc('created_at');
+    }
 }
