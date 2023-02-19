@@ -13,17 +13,20 @@
 <script setup>
 import { router } from '@inertiajs/core'
 import { reactive, watch } from 'vue'
+import { debounce } from 'lodash'
 
 const filterForm = reactive({
   deleted: false,
 })
 
 // reactive or ref or computed
-watch(filterForm, () => {
-  router.get(
-    route('realtor.listing.index'),
-    filterForm,
-    { preserveState: true, preserveScroll: true },
-  )
-})
+watch(
+  filterForm, debounce(() => {
+    router.get(
+      route('realtor.listing.index'),
+      filterForm,
+      { preserveState: true, preserveScroll: true },
+    )
+  }, 1000),
+)
 </script>
