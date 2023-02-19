@@ -7,7 +7,7 @@
         <label for="deleted">Deleted</label>
       </div>
     </div>
-  </form>>
+  </form>
 </template>
 
 <script setup>
