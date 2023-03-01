@@ -1,8 +1,9 @@
 <template>
   <div class="flex flex-col-reverse md:grid grid-cols-12 gap-4">
     <Box class="md:col-span-7 flex items-center w-full">
-      <div v-if="listing.images.length" class="grid grid-cols-2 gap-1">
-        <img v-for="image in listing.images" :key="image.id" :src="image.src" />
+      <div v-if="listing.images.length" class="grid grid-cols-2 gap-3">
+        <img class="w-full rounded-md object-cover h-full" v-for="image in listing.images" :key="image.id"
+          :src="image.src" />
       </div>
       <div v-else class="w-full text-center font-medium text-gray-500">No images</div>
     </Box>
