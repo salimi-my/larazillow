@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 
 class ListingOfferController extends Controller
 {
+
     public function store(Listing $listing, Request $request)
     {
+        $this->authorize('view', $listing); // listingpolicy prevent new offer if sold
         $listing->offers()->save(
             Offer::make(
                 $request->validate([
