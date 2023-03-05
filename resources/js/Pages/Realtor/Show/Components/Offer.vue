@@ -11,10 +11,16 @@
           <Price :price="difference" />
         </div>
 
+        <div class="text-gray-500">
+          Made by {{ offer.bidder.name }}
+        </div>
+
         <div class="text-gra-500 text-sm">Made on {{ madeOn }}</div>
       </div>
       <div>
-        <Link class="btn-outline textxs font-medium" as="button">Accept</Link>
+        <Link :href="route('realtor.offer.accept', { offer: offer.id })" class="btn-outline textxs font-medium"
+          as="button" method="put">
+        Accept</Link>
       </div>
     </section>
   </Box>
