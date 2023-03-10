@@ -10,6 +10,7 @@ use App\Http\Controllers\RealtorListingAcceptOfferController;
 use App\Http\Controllers\RealtorListingController;
 use App\Http\Controllers\RealtorListingImageController;
 use App\Http\Controllers\UserAccountController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,12 @@ Route::get('/email/verify', function () {
   return inertia('Auth/VerifyEmail');
 })->middleware('auth')->name('verification.notice');
 
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+  $request->fulfill();
+
+  return redirect()->route('listing.index')->with('success', 'Email was verified!');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
 Route::resource('user-account', UserAccountController::class)->only(['create', 'store']);
 
 Route::prefix('realtor')->name('realtor.')->middleware('auth', 'verified')->group(function () {
@@ -49,9 +56,7 @@ Route::prefix('realtor')->name('realtor.')->middleware('auth', 'verified')->grou
     ->put('listing/{listing}/restore', [RealtorListingController::class, 'restore'])
     ->withTrashed();
 
-  Route::resource('listing', RealtorListingController::class)
-    // ->only(['index', 'destroy', 'edit', 'update', 'create', 'store'])
-    ->withTrashed();
+  Route::resource('listing', RealtorListingController::class)->withTrashed();
 
   Route::name('offer.accept')
     ->put('offer/{offer}/accept', RealtorListingAcceptOfferController::class);
